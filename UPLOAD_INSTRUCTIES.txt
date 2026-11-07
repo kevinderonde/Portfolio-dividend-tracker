@@ -1,0 +1,1 @@
+Upload de inhoud van deze ZIP naar de ROOT van je GitHub-repository. GitHub > Add file > Upload files. Upload niet de bovenliggende map. De bestaande README.md op GitHub mag vervangen worden. Behoud de bestaande LICENSE op GitHub.

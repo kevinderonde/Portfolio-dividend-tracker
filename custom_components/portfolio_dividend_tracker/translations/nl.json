@@ -1,0 +1,21 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Portfolio Dividend Tracker",
+        "description": "Voer je persoonlijke PDT API-token in.",
+        "data": {
+          "token": "API-token"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Token geweigerd",
+      "cannot_connect": "Kan geen verbinding maken",
+      "invalid_response": "Onverwachte API-response"
+    },
+    "abort": {
+      "already_configured": "Al geconfigureerd"
+    }
+  }
+}
