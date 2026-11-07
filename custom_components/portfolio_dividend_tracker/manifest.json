@@ -1,10 +1,9 @@
 {
   "domain": "portfolio_dividend_tracker",
   "name": "Portfolio Dividend Tracker",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "documentation": "https://api.portfoliodividendtracker.com/",
   "config_flow": true,
   "iot_class": "cloud_polling",
-  "requirements": [],
-  "issue_tracker": "https://github.com/kevinderonde/Portfolio-dividend-tracker/issues"
+  "requirements": []
 }

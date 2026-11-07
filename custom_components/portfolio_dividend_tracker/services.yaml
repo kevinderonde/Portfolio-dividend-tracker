@@ -35,3 +35,36 @@ get_data:
       description: Alleen nodig bij meerdere PDT-configuraties
       selector:
         text:
+
+get_history:
+  name: Historische portefeuilledata ophalen
+  description: Haal historische grafiekpunten op bij PDT voor een gekozen periode. Gebruik een response-variabele.
+  fields:
+    period:
+      name: Periode
+      required: true
+      default: ytd
+      selector:
+        select:
+          options:
+            - "1m"
+            - "3m"
+            - ytd
+            - "1y"
+            - max
+    group_by:
+      name: Groepering
+      default: auto
+      selector:
+        select:
+          options:
+            - auto
+            - day
+            - week
+            - month
+            - quarter
+            - year
+    entry_id:
+      name: Configuratie-ID
+      selector:
+        text:
