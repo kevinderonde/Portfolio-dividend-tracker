@@ -169,19 +169,90 @@ These are the resource names accepted by the current integration. Some PDT API r
 
 ---
 
-## 🏠 Build your own dashboard
+## 📊 PDT Dashboard — Portfolio Performance
 
-Combine the sensors with native Home Assistant cards or custom dashboards to show:
+The Portfolio Dividend Tracker integration includes a **dedicated interactive dashboard** for Home Assistant, giving you a clear overview of your investments, dividends, costs and historical portfolio performance.
 
-- Portfolio value, cash and total performance.
-- Realised versus unrealised investment results.
-- Dividend totals, tax and costs.
-- Trading and broker fees.
-- Currency-related gains and costs.
+The dashboard is designed to work directly with the Portfolio Dividend Tracker integration and uses historical data from the PDT API.
 
-**Not included in this release:** individual stock/ETF sensor entities, a native dividend calendar entity, and a prebuilt dashboard. These may be added in future versions.
+### ✨ Dashboard features
 
----
+- **Interactive performance chart** — Visualise your portfolio's historical performance.
+- **5 selectable time periods** — Switch between 1 Month (1M), 3 Months (3M), Year to Date (YTD), 1 Year (1Y) and Maximum (MAX).
+- **6 chart metrics** — Portfolio Value, Total Gains, Unrealised Gains, Realised Gains, Dividends Received and Transaction Costs.
+- **Portfolio summary** — View current portfolio value, total gains and received dividends.
+- **Adjustable column width** — Choose how many dashboard grid columns the card occupies using a slider.
+- **Adjustable chart height** — Change the chart height using a slider.
+- **Visual configuration editor** — Configure the card without manually editing YAML.
+- **Responsive layout** — Adapts to different dashboard sizes and available screen space.
+- **Manual refresh** — Update historical portfolio information whenever needed.
+- **Home Assistant theme support** — Integrates with your existing dashboard appearance.
+
+### 📈 Historical performance
+
+The dashboard retrieves historical data using the integration's `portfolio_dividend_tracker.get_history` action.
+
+Available time periods:
+
+| Period | Description |
+|---|---|
+| **1M** | Last month |
+| **3M** | Last three months |
+| **YTD** | Year to date |
+| **1Y** | Last year |
+| **MAX** | Maximum available history |
+
+Historical data is requested when needed, avoiding the creation of individual Home Assistant sensors for every historical data point.
+
+### 🚀 Dashboard installation
+
+The dashboard card is included with the Portfolio Dividend Tracker integration.
+
+1. Install or update Portfolio Dividend Tracker through Home Assistant Marketplace.
+2. Restart Home Assistant if required.
+3. Open your Home Assistant dashboard.
+4. Select **Edit dashboard → Add card**.
+5. Search for **PDT Dashboard Card**.
+6. Add the card and configure its settings.
+
+The card requires the Portfolio Dividend Tracker integration to be configured with a valid PDT API token.
+
+### ⚙️ Dashboard configuration
+
+Use the visual card editor to customise:
+
+| Setting | Description |
+|---|---|
+| **Title** | Custom dashboard card title |
+| **Column width** | Number of dashboard grid columns occupied by the card |
+| **Chart height** | Height of the performance graph in pixels |
+
+Example YAML configuration:
+
+```yaml
+type: custom:pdt-dashboard-card
+```
+
+Additional configuration options are available through the visual editor.
+
+### 📊 Available chart metrics
+
+| Metric | Description |
+|---|---|
+| Portfolio Value | Historical total portfolio value |
+| Total Gains | Total realised and unrealised portfolio gains |
+| Unrealised Gains | Gains or losses on positions not yet sold |
+| Realised Gains | Gains or losses from completed sales |
+| Dividends Received | Historical dividend income |
+| Transaction Costs | Historical transaction-related costs |
+
+> **Note:** Historical data availability depends on the information returned by the PDT API. Some periods or metrics may contain limited or unavailable data.
+
+### 🏠 Built for Home Assistant
+
+The PDT Dashboard Card works alongside your existing Home Assistant dashboards. Combine it with other cards, automations and financial sensors to create your own investment monitoring environment.
+
+**One integration. One dashboard. Complete portfolio insights.**
 
 ## 🛠️ Troubleshooting
 
