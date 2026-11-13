@@ -4,8 +4,8 @@
       "user": {
         "title": "Portfolio Dividend Tracker",
         "menu_options": {
-          "pick_implementation": "Sign in with Portfolio Dividend Tracker (OAuth2)",
-          "api_token": "Enter API token manually"
+          "api_token": "Enter API token manually",
+          "pdt_oauth": "Sign in with Portfolio Dividend Tracker (OAuth2)"
         }
       },
       "api_token": {
