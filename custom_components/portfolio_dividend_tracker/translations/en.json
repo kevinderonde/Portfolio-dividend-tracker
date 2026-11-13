@@ -1,0 +1,36 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Portfolio Dividend Tracker",
+        "menu_options": {
+          "pick_implementation": "Sign in with Portfolio Dividend Tracker (OAuth2)",
+          "api_token": "Enter API token manually"
+        }
+      },
+      "api_token": {
+        "title": "API token",
+        "description": "Enter your personal PDT API token.",
+        "data": {
+          "token": "API token"
+        }
+      },
+      "pick_implementation": {
+        "title": "Choose an OAuth2 application",
+        "description": "Select the registered Portfolio Dividend Tracker application."
+      },
+      "auth": {
+        "title": "PDT authorization",
+        "description": "Sign in to Portfolio Dividend Tracker and grant read access."
+      }
+    },
+    "error": {
+      "invalid_auth": "Authentication failed",
+      "cannot_connect": "Cannot connect",
+      "invalid_response": "Unexpected API response"
+    },
+    "abort": {
+      "already_configured": "Already configured"
+    }
+  }
+}
