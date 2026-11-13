@@ -8,7 +8,6 @@
   "requirements": [],
   "dependencies": [
     "frontend",
-    "lovelace",
-    "application_credentials"
+    "lovelace"
   ]
 }
