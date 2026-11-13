@@ -1,0 +1,70 @@
+get_data:
+  name: PDT-gegevens ophalen
+  description: Haal een read-only PDT API-response op. Gebruik een response-variabele in scripts/automatiseringen. Raadpleeg de PDT-documentatie voor parameters en paginering.
+  fields:
+    resource:
+      name: API-onderdeel
+      required: true
+      selector:
+        select:
+          options:
+            - portfolio
+            - transactions
+            - dividends
+            - bookings
+            - expenses
+            - investment-strategies
+            - symbols
+            - prices
+            - brokers
+            - calendar-events
+            - exchange-rates
+            - changelog
+    path:
+      name: Extra pad
+      description: Optioneel subpad, bijvoorbeeld search bij symbols
+      selector:
+        text:
+    parameters:
+      name: Queryparameters
+      description: Optioneel woordenboek met parameters volgens de API-documentatie
+      selector:
+        object:
+    entry_id:
+      name: Configuratie-ID
+      description: Alleen nodig bij meerdere PDT-configuraties
+      selector:
+        text:
+
+get_history:
+  name: Historische portefeuilledata ophalen
+  description: Haal historische grafiekpunten op bij PDT voor een gekozen periode. Gebruik een response-variabele.
+  fields:
+    period:
+      name: Periode
+      required: true
+      default: ytd
+      selector:
+        select:
+          options:
+            - "1m"
+            - "3m"
+            - ytd
+            - "1y"
+            - max
+    group_by:
+      name: Groepering
+      default: auto
+      selector:
+        select:
+          options:
+            - auto
+            - day
+            - week
+            - month
+            - quarter
+            - year
+    entry_id:
+      name: Configuratie-ID
+      selector:
+        text:

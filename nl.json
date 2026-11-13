@@ -1,0 +1,31 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Portfolio Dividend Tracker",
+        "menu_options": {
+          "pick_implementation": "Inloggen met PDT (OAuth2)",
+          "api_token": "Bestaand API-token gebruiken"
+        }
+      },
+      "api_token": {
+        "title": "PDT API-token",
+        "description": "Gebruik je bestaande persoonlijke PDT API-token.",
+        "data": {
+          "token": "API-token"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Token geweigerd",
+      "cannot_connect": "Kan geen verbinding maken",
+      "invalid_response": "Onverwachte API-response"
+    },
+    "abort": {
+      "already_configured": "Al geconfigureerd"
+    }
+  },
+  "application_credentials": {
+    "description": "Een PDT-app registreren kan via {console_url}. De integratie bevat al een gedeelde publieke Client ID."
+  }
+}

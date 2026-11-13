@@ -17,7 +17,7 @@
 </div>
 
 > [!IMPORTANT]
-> **Unofficial community integration.** This project is not affiliated with, sponsored by, or endorsed by Portfolio Dividend Tracker (PDT). You need a PDT API token with read access.
+> **Unofficial community integration.** This project is not affiliated with, sponsored by, or endorsed by Portfolio Dividend Tracker (PDT). You can sign in with PDT using OAuth2 + PKCE or use an existing read-only API token.
 
 ---
 
@@ -35,7 +35,7 @@ Connect [Portfolio Dividend Tracker](https://portfoliodividendtracker.com/) to H
 
 - **31 portfolio summary sensors** for financial insights.
 - **15-minute automatic updates** for the portfolio summary.
-- **Read-only API authentication** using your personal PDT token.
+- **OAuth2 + PKCE sign-in**, with automatic access-token renewal; legacy read-only API tokens remain supported.
 - **On-demand data requests** for supported resources such as transactions and dividends.
 - **Home Assistant dashboard-ready**: use the sensors in Entities, Tile, Statistics and other cards.
 - **No automatic import of entire transaction histories into Recorder**.
@@ -65,7 +65,7 @@ Connect [Portfolio Dividend Tracker](https://portfoliodividendtracker.com/) to H
 4. Add it as an **Integration** and follow the installation instructions.
 5. Restart Home Assistant if prompted.
 6. Go to **Settings → Devices & services → Add integration**.
-7. Search for **Portfolio Dividend Tracker** and enter your **PDT read-only API token**.
+7. Search for **Portfolio Dividend Tracker** and select **Sign in with PDT (OAuth2)** or **Use existing API token**.
 
 ### Manual installation
 
@@ -215,7 +215,7 @@ The dashboard card is included with the Portfolio Dividend Tracker integration.
 5. Search for **PDT Dashboard Card**.
 6. Add the card and configure its settings.
 
-The card requires the Portfolio Dividend Tracker integration to be configured with a valid PDT API token.
+The card requires an authenticated Portfolio Dividend Tracker integration (OAuth2 or personal API token).
 
 ### ⚙️ Dashboard configuration
 
@@ -280,3 +280,12 @@ This project is released under the [MIT License](LICENSE).
 [⬆ Back to top](#-portfolio-dividend-tracker)
 
 </div>
+
+
+## 🔐 OAuth2 + PKCE (beta)
+
+From v0.5.0, new installations can choose **Sign in with PDT (OAuth2)** or the legacy **API token** method. OAuth2 uses the registered public PDT application and Home Assistant's built-in PKCE flow, including refresh-token handling. Existing API-token installations continue to work without migration.
+
+The public app may show **Not verified yet** until PDT approves it. For OAuth2, Home Assistant must support its OAuth callback and be accessible via the configured redirect mechanism. Do not share access or refresh tokens.
+
+**Beta testing:** Verify that PDT accepts the authorization and refresh requests, and that `https://my.home-assistant.io/redirect/oauth` completes the login on your Home Assistant instance.

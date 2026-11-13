@@ -1,0 +1,15 @@
+{
+  "domain": "portfolio_dividend_tracker",
+  "name": "Portfolio Dividend Tracker",
+  "version": "0.5.0",
+  "documentation": "https://github.com/kevinderonde/Portfolio-dividend-tracker",
+  "config_flow": true,
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "dependencies": [
+    "frontend",
+    "lovelace",
+    "auth",
+    "application_credentials"
+  ]
+}

@@ -1,0 +1,10 @@
+PDT OAuth2 PKCE beta 0.5.0-beta.1
+
+1. Maak eerst een back-up van je werkende HA-configuratie.
+2. Publiceer deze bestanden op een aparte GitHub-testbranch of installeer handmatig.
+3. Herstart Home Assistant en controleer logs op fouten.
+4. Bestaande API-tokenconfiguratie blijft ongewijzigd; verwijder deze niet voor een test.
+5. Test OAuth2 op een aparte HA-testinstallatie (dezelfde unique_id voorkomt dubbele configuratie op een installatie).
+6. Controleer autorisatie, callback, data-ophaling en automatische tokenvernieuwing.
+7. Verifieer bij PDT dat /oauth/authorize en /oauth/token de juiste endpoints zijn.
+8. Publiceer pas een stabiele release nadat de end-to-end test slaagt.
