@@ -6,14 +6,14 @@ from homeassistant.components.http import StaticPathConfig
 
 _LOGGER = logging.getLogger(__name__)
 URL = "/portfolio_dividend_tracker/pdt-dashboard-card.js"
-RESOURCE_URL = URL + "?v=040"
+RESOURCE_URL = URL + "?v=051"
 
 async def async_setup_dashboard(hass):
     """Register a static JS endpoint and add its Lovelace resource if supported."""
     if not hass.data.get("pdt_dashboard_static_registered"):
         try:
             await hass.http.async_register_static_paths([
-                StaticPathConfig(URL, str(Path(__file__).parent / "frontend" / "pdt-dashboard-card.js"), False)
+                StaticPathConfig(URL, str(Path(__file__).parent / "pdt-dashboard-card.js"), False)
             ])
             hass.data["pdt_dashboard_static_registered"] = True
         except Exception:

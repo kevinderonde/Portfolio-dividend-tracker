@@ -289,3 +289,20 @@ From v0.5.0, new installations can choose **Sign in with PDT (OAuth2)** or the l
 The public app may show **Not verified yet** until PDT approves it. For OAuth2, Home Assistant must support its OAuth callback and be accessible via the configured redirect mechanism. Do not share access or refresh tokens.
 
 **Beta testing:** Verify that PDT accepts the authorization and refresh requests, and that `https://my.home-assistant.io/redirect/oauth` completes the login on your Home Assistant instance.
+
+
+## 🔐 OAuth2 login (v0.5.1)
+
+When adding the integration, choose **Inloggen met PDT (OAuth2)** to authorize read-only access in your browser. The integration uses Authorization Code + PKCE and Home Assistant's OAuth session to renew access tokens automatically. Existing personal API-token configurations remain supported; select **Bestaand API-token gebruiken** if preferred.
+
+The OAuth application uses the public client registered with PDT and the redirect URL `https://my.home-assistant.io/redirect/oauth`. Configure your Home Assistant external URL and ensure the OAuth redirect is reachable. If your OAuth session expires or the refresh token is revoked, reconnect the integration.
+
+### Dashboard card
+
+The bundled **PDT Dashboard Card** offers historical portfolio charts, period selectors and configurable column width and graph height. Add a card with:
+
+```yaml
+type: custom:pdt-dashboard-card
+```
+
+The integration attempts to register the JavaScript resource automatically. If necessary, add `/portfolio_dividend_tracker/pdt-dashboard-card.js?v=051` as a JavaScript module in Home Assistant dashboard resources.
