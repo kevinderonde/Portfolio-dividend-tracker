@@ -1,13 +1,16 @@
 """Portfolio Dividend Tracker integration."""
+from datetime import date, timedelta
+
 import voluptuous as vol
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, SupportsResponse
-from datetime import date, timedelta
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
+
 from .api import PDTApi
 from .const import DOMAIN, ALLOWED_RESOURCES
 from .coordinator import PDTCoordinator
+from .dashboard import async_setup_dashboard
 
 PLATFORMS = ["sensor"]
 
@@ -82,6 +85,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             return payload
 
         hass.services.async_register(DOMAIN, "get_data", handle_get, schema=schema, supports_response=SupportsResponse.ONLY)
+
+    # Register the bundled Lovelace card, but never break portfolio sensors if UI setup fails.
+    await async_setup_dashboard(hass)
     return True
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
