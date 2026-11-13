@@ -7,3 +7,7 @@ ALLOWED_RESOURCES = (
     "investment-strategies", "symbols", "prices", "brokers",
     "calendar-events", "exchange-rates", "changelog",
 )
+
+CLIENT_ID = "01a1d554-a554-7374-8032-bb6e394fccc7"
+AUTHORIZE_URL = "https://api.portfoliodividendtracker.com/oauth/authorize"
+TOKEN_URL = "https://api.portfoliodividendtracker.com/oauth/token"
