@@ -3,10 +3,25 @@
     "step": {
       "user": {
         "title": "Portfolio Dividend Tracker",
+        "menu_options": {
+          "pick_implementation": "Inloggen met Portfolio Dividend Tracker (OAuth2)",
+          "api_token": "Handmatig API-token invoeren"
+        }
+      },
+      "api_token": {
+        "title": "API-token",
         "description": "Voer je persoonlijke PDT API-token in.",
         "data": {
           "token": "API-token"
         }
+      },
+      "pick_implementation": {
+        "title": "Kies een OAuth2-app",
+        "description": "Selecteer de geregistreerde Portfolio Dividend Tracker-app."
+      },
+      "auth": {
+        "title": "PDT autorisatie",
+        "description": "Log in bij Portfolio Dividend Tracker en geef toestemming."
       }
     },
     "error": {
