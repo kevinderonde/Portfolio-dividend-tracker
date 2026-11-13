@@ -8,14 +8,36 @@ from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .api import PDTApi
-from .const import DOMAIN, ALLOWED_RESOURCES
+from .const import DOMAIN, ALLOWED_RESOURCES, CLIENT_ID, AUTHORIZE_URL, TOKEN_URL
+from homeassistant.helpers import config_entry_oauth2_flow
 from .coordinator import PDTCoordinator
 from .dashboard import async_setup_dashboard
 
 PLATFORMS = ["sensor"]
 
+async def async_setup(hass: HomeAssistant, config: dict) -> bool:
+    """Register the shared public PDT OAuth app with Home Assistant."""
+    config_entry_oauth2_flow.async_register_implementation(
+        hass, DOMAIN,
+        config_entry_oauth2_flow.LocalOAuth2ImplementationWithPkce(
+            hass, DOMAIN, CLIENT_ID, authorize_url=AUTHORIZE_URL, token_url=TOKEN_URL,
+        ),
+    )
+    return True
+
+
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    api = PDTApi(async_get_clientsession(hass), entry.data["token"])
+    if "token" in entry.data and isinstance(entry.data["token"], str):
+        api = PDTApi(async_get_clientsession(hass), token=entry.data["token"])
+    else:
+        implementation = await config_entry_oauth2_flow.async_get_config_entry_implementation(hass, entry)
+        oauth_session = config_entry_oauth2_flow.OAuth2Session(hass, entry, implementation)
+
+        async def get_access_token():
+            await oauth_session.async_ensure_token_valid()
+            return oauth_session.token["access_token"]
+
+        api = PDTApi(async_get_clientsession(hass), token_provider=get_access_token)
     coordinator = PDTCoordinator(hass, api)
     await coordinator.async_config_entry_first_refresh()
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = coordinator
