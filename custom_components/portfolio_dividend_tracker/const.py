@@ -9,5 +9,5 @@ ALLOWED_RESOURCES = (
 )
 
 CLIENT_ID = "01a1d554-a554-7374-8032-bb6e394fccc7"
-AUTHORIZE_URL = "https://api.portfoliodividendtracker.com/oauth/authorize"
-TOKEN_URL = "https://api.portfoliodividendtracker.com/oauth/token"
+AUTHORIZE_URL = "https://auth.portfoliodividendtracker.com/oauth/authorize"
+TOKEN_URL = "https://auth.portfoliodividendtracker.com/oauth/token"
