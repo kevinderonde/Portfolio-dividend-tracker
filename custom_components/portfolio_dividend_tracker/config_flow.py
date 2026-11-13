@@ -4,7 +4,7 @@ import voluptuous as vol
 from aiohttp import ClientError, ClientTimeout
 from homeassistant.helpers import config_entry_oauth2_flow
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
-from .const import DOMAIN, API_URL
+from .const import DOMAIN, API_URL, CLIENT_ID, AUTHORIZE_URL, TOKEN_URL
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -18,8 +18,27 @@ class PDTConfigFlow(config_entry_oauth2_flow.AbstractOAuth2FlowHandler, domain=D
 
     async def async_step_user(self, user_input=None):
         if user_input is None:
-            return self.async_show_menu(step_id="user", menu_options=["pick_implementation", "api_token"])
-        return await self.async_step_pick_implementation()
+            return self.async_show_menu(step_id="user", menu_options=["pdt_oauth", "api_token"])
+        return await self.async_step_pdt_oauth()
+
+    async def async_step_pdt_oauth(self, user_input=None):
+        """Start the bundled public PDT OAuth2 PKCE flow without credentials UI."""
+        implementation = config_entry_oauth2_flow.LocalOAuth2ImplementationWithPkce(
+            self.hass,
+            DOMAIN,
+            CLIENT_ID,
+            authorize_url=AUTHORIZE_URL,
+            token_url=TOKEN_URL,
+        )
+        config_entry_oauth2_flow.async_register_implementation(
+            self.hass, DOMAIN, implementation
+        )
+        self.flow_impl = implementation
+        return await self.async_step_auth()
+
+    async def async_step_pick_implementation(self, user_input=None):
+        """Use the bundled public OAuth client rather than requesting credentials."""
+        return await self.async_step_pdt_oauth(user_input)
 
     async def async_step_api_token(self, user_input=None):
         errors = {}
