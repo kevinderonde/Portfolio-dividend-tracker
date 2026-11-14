@@ -9,5 +9,9 @@
   "dependencies": [
     "frontend",
     "lovelace"
+  ],
+  "issue_tracker": "https://github.com/kevinderonde/Portfolio-dividend-tracker/issues",
+  "codeowners": [
+    "@kevinderonde"
   ]
 }
