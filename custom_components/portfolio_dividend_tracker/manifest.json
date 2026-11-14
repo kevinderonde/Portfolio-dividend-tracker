@@ -8,7 +8,8 @@
   "requirements": [],
   "dependencies": [
     "frontend",
-    "lovelace"
+    "lovelace",
+    "http"
   ],
   "issue_tracker": "https://github.com/kevinderonde/Portfolio-dividend-tracker/issues",
   "codeowners": [
