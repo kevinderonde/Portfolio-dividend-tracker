@@ -10,5 +10,9 @@
     "frontend",
     "lovelace",
     "auth"
-  ]
+  ],
+  "codeowners": [
+    "@kevinderonde"
+  ],
+  "issue_tracker": "https://github.com/kevinderonde/Portfolio-dividend-tracker/issues"
 }
