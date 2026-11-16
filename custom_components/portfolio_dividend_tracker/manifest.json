@@ -1,3 +1,4 @@
+
 {
   "domain": "portfolio_dividend_tracker",
   "name": "Portfolio Dividend Tracker",
@@ -11,6 +12,7 @@
     "http"
   ],
   "documentation": "https://github.com/kevinderonde/Portfolio-dividend-tracker",
+  "integration_type": "service",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/kevinderonde/Portfolio-dividend-tracker/issues",
   "requirements": [],
