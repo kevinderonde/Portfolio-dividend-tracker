@@ -3,6 +3,7 @@ import logging
 import voluptuous as vol
 from aiohttp import ClientError, ClientTimeout
 from homeassistant.helpers import config_entry_oauth2_flow
+from homeassistant.config_entries import SOURCE_REAUTH
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from .const import DOMAIN, API_URL, CLIENT_ID, AUTHORIZE_URL, TOKEN_URL
 
@@ -40,7 +41,23 @@ class PDTConfigFlow(config_entry_oauth2_flow.AbstractOAuth2FlowHandler, domain=D
         """Use the bundled public OAuth client rather than requesting credentials."""
         return await self.async_step_pdt_oauth(user_input)
 
-    async def async_step_api_token(self, user_input=None):
+    async def async_step_reauth(self, entry_data):
+        """Start reauthentication without removing the existing config entry."""
+        entry = self._get_reauth_entry()
+        if "token" in entry.data and isinstance(entry.data["token"], str):
+            return await self.async_step_reauth_confirm()
+        return await self.async_step_reauth_confirm()
+
+    async def async_step_reauth_confirm(self, user_input=None):
+        """Confirm reauthentication using the original login method."""
+        entry = self._get_reauth_entry()
+        if "token" in entry.data and isinstance(entry.data["token"], str):
+            return await self.async_step_api_token(user_input, reauth=True)
+        if user_input is not None:
+            return await self.async_step_pdt_oauth()
+        return self.async_show_form(step_id="reauth_confirm")
+
+    async def async_step_api_token(self, user_input=None, reauth=False):
         errors = {}
         if user_input is not None:
             token = user_input["token"].strip()
@@ -58,6 +75,10 @@ class PDTConfigFlow(config_entry_oauth2_flow.AbstractOAuth2FlowHandler, domain=D
                         if not isinstance(payload, dict) or not isinstance(payload.get("data", {}).get("summary"), dict):
                             errors["base"] = "invalid_response"
                         else:
+                            if reauth or self.source == SOURCE_REAUTH:
+                                return self.async_update_reload_and_abort(
+                                    self._get_reauth_entry(), data_updates={"token": token}
+                                )
                             await self.async_set_unique_id("pdt_portfolio")
                             self._abort_if_unique_id_configured()
                             return self.async_create_entry(title="Portfolio Dividend Tracker", data={"token": token})
@@ -66,6 +87,10 @@ class PDTConfigFlow(config_entry_oauth2_flow.AbstractOAuth2FlowHandler, domain=D
         return self.async_show_form(step_id="api_token", data_schema=vol.Schema({vol.Required("token"): str}), errors=errors)
 
     async def async_oauth_create_entry(self, data):
+        if self.source == SOURCE_REAUTH:
+            return self.async_update_reload_and_abort(
+                self._get_reauth_entry(), data_updates=data
+            )
         await self.async_set_unique_id("pdt_portfolio")
         self._abort_if_unique_id_configured()
         return self.async_create_entry(title="Portfolio Dividend Tracker", data=data)

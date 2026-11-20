@@ -305,4 +305,4 @@ The bundled **PDT Dashboard Card** offers historical portfolio charts, period se
 type: custom:pdt-dashboard-card
 ```
 
-The integration attempts to register the JavaScript resource automatically. If necessary, add `/portfolio_dividend_tracker/pdt-dashboard-card.js?v=051` as a JavaScript module in Home Assistant dashboard resources.
+The integration attempts to register the JavaScript resource automatically. If necessary, add `/portfolio_dividend_tracker/pdt-dashboard-card.js?v=057` as a JavaScript module in Home Assistant dashboard resources.

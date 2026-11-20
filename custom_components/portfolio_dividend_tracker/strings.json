@@ -22,6 +22,10 @@
       "auth": {
         "title": "PDT autorisatie",
         "description": "Log in bij Portfolio Dividend Tracker en geef toestemming."
+      },
+      "reauth_confirm": {
+        "title": "Opnieuw aanmelden",
+        "description": "Meld je opnieuw aan bij Portfolio Dividend Tracker om de verbinding te herstellen."
       }
     },
     "error": {

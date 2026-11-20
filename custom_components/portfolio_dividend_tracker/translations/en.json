@@ -22,6 +22,10 @@
       "auth": {
         "title": "PDT authorization",
         "description": "Sign in to Portfolio Dividend Tracker and grant read access."
+      },
+      "reauth_confirm": {
+        "title": "Reconnect account",
+        "description": "Sign in to Portfolio Dividend Tracker again to restore the connection."
       }
     },
     "error": {
